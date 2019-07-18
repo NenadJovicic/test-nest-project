@@ -7,11 +7,22 @@ import { normalUserModel, UserDocument } from './user.schema';
 export class UserService {
     constructor(@InjectModel('user') private readonly userModel: Model<UserDocument>) {}
 
-    async getNumberOfUsers(): Promise<number> {
+    /**
+     * this method works normally
+     */
+    async getNestNumberOfUsers(): Promise<number> {
         try {
             return await this.userModel.countDocuments({});
-            // this return below will not be executed if you put previous line under comment
-            // and it won't error also
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    /**
+     * This one will be never executed. and it does not throw an error
+     */
+    async getMongooseNumberOfUsers(): Promise<number> {
+        try {
             return await normalUserModel.countDocuments({});
         } catch (error) {
             console.log(error);

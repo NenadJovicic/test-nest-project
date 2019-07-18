@@ -5,8 +5,13 @@ import { UserService } from './user.service';
 export class UserController {
     constructor(private readonly userService: UserService) {}
 
-    @Get()
-    async getNumberOfUsers(): Promise<number> {
-        return this.userService.getNumberOfUsers();
+    @Get('nest')
+    async getNestNumberOfUsers(): Promise<number> {
+        return this.userService.getNestNumberOfUsers();
+    }
+
+    @Get('mongoose')
+    async getMongooseNumberOfUsers(): Promise<number> {
+        return this.userService.getMongooseNumberOfUsers();
     }
 }
